@@ -3,14 +3,13 @@ package dominio.unitaria;
 import org.junit.Before;
 import org.junit.Test;
 
-import dominio.Carro;
-import dominio.Moto;
+
 import dominio.ReglasNegocio;
 import dominio.Vehiculo;
 import testdatabuilder.CarroTestDataBuilder;
 import testdatabuilder.MotoTestDataBuilder;
 
-import static org.mockito.Mockito.mock;
+
 
 import java.util.Calendar;
 
