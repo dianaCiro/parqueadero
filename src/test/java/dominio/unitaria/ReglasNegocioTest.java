@@ -3,7 +3,8 @@ package dominio.unitaria;
 import org.junit.Before;
 import org.junit.Test;
 
-
+import dominio.Carro;
+import dominio.Moto;
 import dominio.ReglasNegocio;
 import dominio.Vehiculo;
 import testdatabuilder.CarroTestDataBuilder;
@@ -23,17 +24,18 @@ public class ReglasNegocioTest {
 	private ReglasNegocio reglasNegocio;
 	private MotoTestDataBuilder motoBuilder;
 	private CarroTestDataBuilder carroBuilder;
-	private Calendar date;
+	private Calendar fechaEntrada;
+	private Calendar fechaSalida;
 	private String auxStr;
+	private int auxInt;
 	private boolean auxBool;
 	
 	@Before
 	public void inicializar(){
 		
 		reglasNegocio = new ReglasNegocio();
-		
-		
-		date = Calendar.getInstance();
+		fechaEntrada = Calendar.getInstance();
+		fechaSalida = Calendar.getInstance();
 	}
 	
 	
@@ -58,10 +60,10 @@ public class ReglasNegocioTest {
 		//Arrange
 		carroBuilder = new CarroTestDataBuilder().conPlaca("ASD FFF");
 		carro = carroBuilder.build();
-		date.set(Calendar.DAY_OF_WEEK, 1);
+		fechaEntrada.set(Calendar.DAY_OF_WEEK, 1);
 		
 		//Act
-		auxStr = reglasNegocio.permitirIngreso(carro, date);
+		auxStr = reglasNegocio.permitirIngreso(carro, fechaEntrada);
 		
 		//Assert
 		Assert.assertTrue(auxStr.equalsIgnoreCase(MENSAJE_AUTORIZACION));
@@ -82,7 +84,55 @@ public class ReglasNegocioTest {
 	}
 	
 	@Test
-	public void reciboSalida(){
+	public void calcularTiempoDePermanencia(){
+		
+		//Arrange
+		fechaEntrada.set(Calendar.HOUR_OF_DAY, 10);
+		fechaSalida.set(Calendar.HOUR_OF_DAY, 22);
+		
+		//Act
+		auxInt = reglasNegocio.calcularTiempoDePermanencia(fechaEntrada , fechaSalida);
+		
+		//Assert
+		Assert.assertEquals(auxInt, 12);
+		
+	}
+	
+	@Test
+	public void calcularMontoAPagarMoto(){
+		
+		//Arrange
+		fechaEntrada.set(Calendar.HOUR_OF_DAY, 10);
+		fechaSalida.set(Calendar.HOUR_OF_DAY, 20);
+		motoBuilder = new MotoTestDataBuilder().conCilindraje(650);
+		moto = motoBuilder.build();
+		//Act
+		auxInt = reglasNegocio.calcularMontoAPagar(moto,fechaEntrada,fechaSalida );
+		
+		//Assert
+		Assert.assertEquals(auxInt, 6000);
+		
+		
+	}
+	
+	@Test
+	public void calcularMontoAPagarCarro(){
+		
+		//Arrange
+		int diaEntrada = fechaEntrada.get(Calendar.DAY_OF_MONTH);
+		fechaEntrada.set(Calendar.HOUR_OF_DAY, 1);
+		fechaSalida.set(Calendar.DAY_OF_MONTH, diaEntrada + 1);
+		fechaSalida.set(Calendar.HOUR_OF_DAY, 4);
+		carroBuilder = new CarroTestDataBuilder().conPlaca("ASD FFF");
+		carro = carroBuilder.build();
+		//Act
+		auxInt = reglasNegocio.calcularMontoAPagar(carro,fechaEntrada,fechaSalida );
+		
+		//Assert
+		Assert.assertEquals(auxInt, 11000);
+		
 		
 	}
 }
+
+
