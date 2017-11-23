@@ -46,12 +46,12 @@ public class ReglasNegocio implements RepositorioReglasNegocio{
 		int dia;
 		String autorizar;
 		
-		autorizar = "Está autorizado a ingresar";
+		autorizar = "Esta autorizado a ingresar";
 		dia = date.get(Calendar.DAY_OF_WEEK);
 		
 		if (esLetraInicialA(vehiculo.getPlaca())){
 			if (dia == 1 || dia == 2){
-				autorizar = "No está autorizado para ingresar";
+				autorizar = "No esta autorizado para ingresar";
 			}
 		}
 		return autorizar;

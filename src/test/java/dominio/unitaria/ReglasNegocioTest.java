@@ -17,7 +17,7 @@ import org.junit.Assert;
 
 public class ReglasNegocioTest {
 	
-	private static final String MENSAJE_AUTORIZACION = "No está autorizado para ingresar";
+	private static final String MENSAJE_AUTORIZACION = "No esta autorizado para ingresar";
 	private Vehiculo carro;
 	private Vehiculo moto;
 	private ReglasNegocio reglasNegocio;
