@@ -2,9 +2,6 @@ package dominio;
 
 import java.util.Calendar;
 
-import org.hamcrest.core.IsInstanceOf;
-
-import dominio.repositorio.RepositorioReglasNegocio;
 
 
 public class ReglasNegocio{
@@ -15,9 +12,7 @@ public class ReglasNegocio{
 	private static final int VALOR_DIA_MOTO = 4000;
 	private static final int EXCEDENTE_MOTO = 2000;
 	private static final int HORA_INICIO_DIA = 9;
-	
-	private Calendar calendario;
-	
+
 	public boolean esLetraInicialA(String placa) {
 		
 		char letra = placa.toLowerCase().charAt(0);

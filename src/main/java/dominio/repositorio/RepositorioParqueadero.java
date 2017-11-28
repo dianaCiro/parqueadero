@@ -1,8 +1,10 @@
 package dominio.repositorio;
 
+
+import dominio.Parqueadero;
+
 public interface RepositorioParqueadero {
 	
-	int obtenerTotalCarros();
-	int obtenerTotalMotos();
-	
+	void agregar(Parqueadero parqueadero);
+	Parqueadero obtenerParqueadero(String nombre);
 }
